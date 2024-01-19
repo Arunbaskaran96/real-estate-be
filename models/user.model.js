@@ -1,24 +1,30 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const usermodel = new mongoose.Schema(
   {
     username: {
       type: String,
-      require: true,
+      required: true,
       unique: true,
     },
     email: {
       type: String,
-      require: true,
+      required: true,
       unique: true,
     },
     password: {
       type: String,
-      require: true,
+      required: true,
       unique: true,
+    },
+    photo: {
+      type: String,
+      default: "https://www.svgrepo.com/show/335455/profile-default.svg",
     },
   },
   { timestamps: true }
 );
 
-module.exports = mongoose.model("user", usermodel);
+const User = mongoose.model("User", usermodel);
+
+export default User;

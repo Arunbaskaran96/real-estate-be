@@ -1,13 +1,20 @@
-const express = require("express");
-const app = express();
-const mongoose = require("mongoose");
-const cors = require("cors");
-const bodyparser = require("body-parser");
-const dotenv = require("dotenv");
-dotenv.config();
-// import express from 'express'
-// const app=express()
+// const express = require("express");
+// const app = express();
+// const mongoose = require("mongoose");
+// const cors = require("cors");
+// const bodyparser = require("body-parser");
+// const dotenv = require("dotenv");
 
+import express from "express";
+import mongoose from "mongoose";
+import cors from "cors";
+import bodyparser from "body-parser";
+import dotenv from "dotenv";
+import authrouter from "./routes/auth.router.js";
+import userrouter from "./routes/user.router.js";
+
+const app = express();
+dotenv.config();
 app.use(cors());
 app.use(bodyparser.json());
 
@@ -20,8 +27,7 @@ mongoose
     console.log(err);
   });
 
-const userrouter = require("./controllers/auth.controller");
-
+app.use("/api", authrouter);
 app.use("/api", userrouter);
 
 app.use((error, req, res, next) => {
